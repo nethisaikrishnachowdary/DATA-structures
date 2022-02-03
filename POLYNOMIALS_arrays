@@ -1,0 +1,117 @@
+#define MAX 50
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+struct polynomial
+{
+        int highpower;
+        int coeff[MAX];
+};
+typedef struct polynomial poly;
+
+poly *create()
+{
+        int i;
+        poly *p;
+        p=(poly*)malloc(sizeof(poly));
+        printf("Enter the high power of the polynomial :");
+        scanf("%d",&p->highpower);
+        for(i=p->highpower;i>=0;i--)
+        {
+                printf("Enter the coeff of %d exponent :",i);
+                scanf("%d",&p->coeff[i]);
+        }
+        return p;
+}
+void display(poly *p)
+{
+        int i;
+        for(i=p->highpower;i>=0;i--)
+        {
+                printf("%dx^%d + ",p->coeff[i],i);
+        }
+      
+}
+int Max(int a,int b)
+{
+        return(a>b?a:b);
+}
+poly *add(poly *p1,poly *p2)
+{
+        poly *p3;
+        int i;
+        p3=(poly*)malloc(sizeof(poly));
+        p3->highpower=Max(p1->highpower,p2->highpower);
+        for(i=p3->highpower;i>=0;i--)
+        {
+                p3->coeff[i]=p1->coeff[i]+p2->coeff[i];
+        }
+        return p3;
+}
+poly *mul(poly *p1,poly *p2)
+{
+        poly *p3;
+        int i,j;
+        p3=(poly*)malloc(sizeof(poly));
+        p3->highpower=p1->highpower+p2->highpower;
+        for(i=p1->highpower;i>=0;i--)
+        {
+                for(j=p2->highpower;j>=0;j--)
+                {
+                }
+        }
+        return p3;
+}
+/*void display(poly *p)
+{
+        int i;
+        for(i=p->highpower;i>=0;i--)
+        {
+                printf("%dx^%d + ",p->coeff[i],i);
+        }
+}*/
+poly *sub(poly *p1,poly *p2)
+{
+        poly *p3;
+        int i;
+        p3=(poly*)malloc(sizeof(poly));
+        p3->highpower=Max(p1->highpower,p2->highpower);
+        for(i=p3->highpower;i>=0;i--)
+        {
+                p3->coeff[i]=p1->coeff[i]-p2->coeff[i];
+        }
+        return p3;
+}
+int main()
+{
+        poly *p1,*p2,*p3;
+        int ch;
+        printf("Create first Polynomial :\n");
+        p1=create();
+        printf("Create Second Polynomial :\n");
+        p2=create();
+        while(1)
+        {
+                printf("\n1.Addition\n2.Multiplication\n3.Subtraction\n4.Exit\n");
+                printf("Give your choice:");
+                scanf("%d",&ch);
+                switch(ch)
+                {
+                        case 1 : p3=add(p1,p2);
+                                 printf("Result Addition :");
+                                 display(p3);
+                               break;
+                      case 2 : p3=mul(p1,p2);
+                                 printf("Result of Multiplication :");
+                                 display(p3);
+                                 break;
+                      case 3 : p3=sub(p1,p2);
+                               printf("Result of Subtraction :");
+                               display(p3);
+                               break;
+                      case 4 : exit(0);
+
+                        default : printf("Invalid Choice");
+                }
+        }
+}
