@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct ll
+{
+    int data;
+    struct ll *next;
+};
+typedef struct ll node;
+node* create(node *first)
+{
+    node *new,*prev;
+    int x;
+    printf("enter value(enter -1 to stop)\n");
+    scanf("%d",&x);
+    while(x!=-1)
+    {
+        new=(node*)malloc(sizeof(node));
+        new->data=x;
+        new->next=NULL;
+        if(first==NULL)
+        {
+            first=new;
+        }
+        else
+        {
+            prev->next=new;
+        }
+        prev=new;
+        printf("enter value(enter -1 to stop)\n");
+        scanf("%d",&x);
+    }
+    return first;
+}
+void display(node *first)
+{
+    node *temp=first;
+    if(first==NULL)
+    {
+        printf("there is nothing");
+    }
+    else
+    {
+        while(temp!=NULL)
+        {
+            printf("|%d|->",temp->data);
+            temp=temp->next;
+        }
+        printf("NULL");
+    }
+}
+int main()
+{
+    node *head=NULL;
+    head=create(head);
+    display(head);
+}
+        
